@@ -35,28 +35,39 @@ export async function loadWallpapers(): Promise<number> {
 
 function toWall(it: Item): Wall { return { url: it.url, label: CAT_LABEL[it.cat] || it.cat } }
 
+// The active pool is the user's custom images if any, otherwise the built-in
+// minimal gradients. Both are handled uniformly and keyed by url-or-label so a
+// manual shuffle persists and survives the periodic auto-refresh.
+function pool(): Wall[] { return ITEMS.length ? ITEMS.map(toWall) : FALLBACK }
+function keyOf(w: Wall): string { return w.url || w.label }
+
+function readSel(): { key: string; ts: number } | null {
+  try { return JSON.parse(localStorage.getItem(KEY) || 'null') } catch { return null }
+}
+function writeSel(w: Wall, now: number) {
+  try { localStorage.setItem(KEY, JSON.stringify({ key: keyOf(w), ts: now })) } catch {}
+}
+
 export function currentBg(now: number): Wall {
-  if (!ITEMS.length) return FALLBACK[Math.floor((now / TWO_HOURS)) % FALLBACK.length]
-  let s: { url: string; ts: number } | null = null
-  try { s = JSON.parse(localStorage.getItem(KEY) || 'null') } catch {}
-  const stillValid = s && now - s.ts <= TWO_HOURS && ITEMS.some(i => i.url === s!.url)
-  if (!stillValid) {
-    const it = ITEMS[Math.floor(Math.random() * ITEMS.length)]
-    s = { url: it.url, ts: now }
-    try { localStorage.setItem(KEY, JSON.stringify(s)) } catch {}
-    return toWall(it)
-  }
-  return toWall(ITEMS.find(i => i.url === s!.url)!)
+  const p = pool()
+  const s = readSel()
+  const found = s ? p.find(w => keyOf(w) === s.key) : undefined
+  if (found && now - s!.ts <= TWO_HOURS) return found
+  // pick a fresh one, seeded by the two-hour bucket so reloads stay stable
+  const w = p[Math.floor(now / TWO_HOURS) % p.length]
+  writeSel(w, now)
+  return w
 }
 
 export function shuffleBg(now: number): Wall {
-  if (!ITEMS.length) return FALLBACK[Math.floor(Math.random() * FALLBACK.length)]
-  let cur: { url: string } | null = null
-  try { cur = JSON.parse(localStorage.getItem(KEY) || 'null') } catch {}
-  let it = ITEMS[Math.floor(Math.random() * ITEMS.length)]
-  if (ITEMS.length > 1 && cur) { while (it.url === cur.url) it = ITEMS[Math.floor(Math.random() * ITEMS.length)] }
-  try { localStorage.setItem(KEY, JSON.stringify({ url: it.url, ts: now })) } catch {}
-  return toWall(it)
+  const p = pool()
+  const curKey = readSel()?.key || ''
+  let w = p[Math.floor(Math.random() * p.length)]
+  for (let i = 0; p.length > 1 && keyOf(w) === curKey && i < 12; i++) {
+    w = p[Math.floor(Math.random() * p.length)]
+  }
+  writeSel(w, now)
+  return w
 }
 
 export function bgStyle(w: Wall): React.CSSProperties {

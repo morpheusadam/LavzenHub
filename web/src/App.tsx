@@ -207,7 +207,7 @@ function FloatingMenu({ bgLabel, onSearch, onShuffle, onFullscreen, onPush, onSi
         <div className="ms-div" />
         <div className="ms-actions">
           <button className="ms-item" onClick={() => { onSearch(); setOpen(false) }}><Icon name="search" size={18} /><span>Search</span><kbd>⌘K</kbd></button>
-          <button className="ms-item" onClick={onShuffle}><Icon name="shuffle" size={18} /><span>Wallpaper</span>{bgLabel && <em>{bgLabel}</em>}</button>
+          <button className="ms-item" onClick={() => { onShuffle(); setOpen(false) }}><Icon name="shuffle" size={18} /><span>Wallpaper</span>{bgLabel && <em>{bgLabel}</em>}</button>
           <button className="ms-item" onClick={() => go('/settings')}><Icon name="wrench" size={18} /><span>Settings</span></button>
           <button className="ms-item" onClick={onFullscreen}><Icon name="expand" size={18} /><span>Fullscreen</span></button>
           <a className="ms-item" href="/api/backup.php"><Icon name="download" size={18} /><span>Download backup</span></a>

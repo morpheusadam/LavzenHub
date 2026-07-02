@@ -40,8 +40,8 @@ export default function BoardPage() {
   return (
     <div className="wrap board">
       <div className="launch-head">
-        <div><h1 className="greet">{greeting}</h1><WordOfDay /></div>
-        <button className="btn primary" onClick={() => setModal({})}><Icon name="plus" size={16} /> Add app</button>
+        <h1 className="greet">{greeting}</h1>
+        <WordOfDay />
       </div>
 
       <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={onDragEnd}>

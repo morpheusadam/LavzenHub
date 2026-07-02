@@ -224,7 +224,7 @@ button{font-family:inherit;cursor:pointer;color:inherit;border:0;background:none
 kbd{font-family:var(--mono);font-size:10px;background:rgba(255,255,255,.08);border:1px solid var(--line);border-radius:6px;padding:1px 6px}
 
 /* launcher */
-.launch-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:24px;flex-wrap:wrap}
+.launch-head{display:flex;align-items:center;gap:10px 18px;margin-bottom:24px;flex-wrap:wrap}
 .launch-head h1{font-size:26px;font-weight:800}
 .launch-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:14px}
 .launch-grid .tile{position:relative;border-radius:18px;border:1px solid var(--line);background:var(--glass);
@@ -347,13 +347,13 @@ a.widget:hover{transform:translateY(-3px);border-color:rgba(163,230,53,.35)}
 .launch-grid .tile:hover{box-shadow:0 14px 32px -18px rgba(0,0,0,.8),0 0 0 1px rgba(163,230,53,.22)}
 
 /* ===== word of the day ===== */
-.wotd{display:flex;align-items:center;gap:11px;flex-wrap:wrap;margin-top:8px}
+.wotd{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:0}
 .wotd-label{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--dim)}
 .wotd-en{font-size:17px;font-weight:800;color:var(--lime);letter-spacing:.01em}
 .wotd-fa{font-size:14px;color:var(--txt)}
 .wotd-next{width:27px;height:27px;border-radius:8px;display:grid;place-items:center;border:1px solid var(--line);background:rgba(255,255,255,.06);color:var(--muted);transition:.2s}
 .wotd-next:hover{color:var(--lime);border-color:rgba(163,230,53,.4);transform:rotate(180deg)}
-.wotd-ex{flex-basis:100%;font-size:12px;color:var(--muted);font-style:italic}
+.wotd-ex{font-size:12px;color:var(--muted);font-style:italic}
 
 /* ===== news page (image cards) ===== */
 .news-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
@@ -417,7 +417,7 @@ a.widget:hover{transform:translateY(-3px);border-color:rgba(163,230,53,.35)}
 /* word-of-day audio */
 .wotd-speak{width:26px;height:26px;border-radius:8px;display:grid;place-items:center;border:1px solid var(--line);background:rgba(255,255,255,.06);color:var(--lime);transition:.15s}
 .wotd-speak:hover{background:rgba(163,230,53,.16);transform:scale(1.1)}
-.wotd-ex-play{display:inline-flex;align-items:center;gap:6px;flex-basis:100%;margin-top:2px;color:var(--muted);background:none;border:0;text-align:left;cursor:pointer;padding:0}
+.wotd-ex-play{display:inline-flex;align-items:center;gap:6px;color:var(--muted);background:none;border:0;text-align:left;cursor:pointer;padding:0}
 .wotd-ex-play:hover{color:var(--txt)}
 .wotd-ex-play .ic{color:var(--lime);flex:none}
 
@@ -459,7 +459,7 @@ textarea.input{width:100%;box-sizing:border-box}
 .btn.sm{padding:6px 12px;font-size:12.5px;align-self:flex-start}
 
 /* ---------- minimal home greeting ---------- */
-.greet{font-size:clamp(24px,3.2vw,34px);font-weight:800;letter-spacing:-.01em;line-height:1.15;
+.greet{font-size:clamp(19px,2.3vw,26px);font-weight:800;letter-spacing:-.01em;line-height:1.2;white-space:nowrap;
   background:linear-gradient(180deg,#fff,#c9cbd6);-webkit-background-clip:text;background-clip:text;color:transparent}
 .wrap.board .launch-head{margin-bottom:34px}
 
