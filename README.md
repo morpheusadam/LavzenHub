@@ -1,5 +1,4 @@
 # Lavzen Hub
-
 A self-hosted personal dashboard and start page. One private place for your app
 launcher, tech news, media, service health, tasks, notes and backups, protected
 by a single password and served from one small PHP container.
