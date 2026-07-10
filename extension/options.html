@@ -1,25 +1,82 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Hub - Options</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lavzen Hub — Settings</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="icons/icon32.png">
+  <link rel="icon" type="image/png" sizes="128x128" href="icons/icon128.png">
   <style>
-    body { font-family: system-ui, sans-serif; background: #0b0b12; color: #eaeaf0; margin: 0; padding: 28px; min-width: 340px; }
-    h1 { font-size: 18px; margin: 0 0 4px; }
-    p { color: #a6a8b4; font-size: 13px; line-height: 1.5; margin: 0 0 16px; }
-    label { display: block; font-size: 12px; color: #a6a8b4; margin-bottom: 6px; }
-    input { width: 100%; box-sizing: border-box; padding: 10px 12px; border-radius: 9px; border: 1px solid #ffffff22; background: #14141c; color: #fff; font-size: 14px; }
-    button { margin-top: 14px; padding: 10px 16px; border: 0; border-radius: 9px; background: #a3e635; color: #07070a; font-weight: 700; cursor: pointer; }
-    .ok { color: #a3e635; font-size: 13px; margin-top: 10px; height: 16px; }
+    :root {
+      --bg: #0b0b12;
+      --panel: #14141c;
+      --border: #ffffff22;
+      --text: #eaeaf0;
+      --muted: #a6a8b4;
+      --brand: #a3e635;
+      --danger: #fb7185;
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: system-ui, -apple-system, Segoe UI, sans-serif;
+      background: radial-gradient(80% 60% at 100% 0%, #c084fc10, transparent 60%), var(--bg);
+      color: var(--text); margin: 0; padding: 26px; width: 380px;
+    }
+    .head { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+    .head img { width: 40px; height: 40px; }
+    .head h1 { font-size: 17px; margin: 0; letter-spacing: .2px; }
+    .head span { display: block; font-size: 12px; color: var(--muted); margin-top: 2px; }
+    p.lead { color: var(--muted); font-size: 13px; line-height: 1.55; margin: 0 0 18px; }
+    label { display: block; font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+    input {
+      width: 100%; padding: 11px 12px; border-radius: 10px;
+      border: 1px solid var(--border); background: #0e0e15; color: #fff; font-size: 14px;
+      transition: border-color .15s ease;
+    }
+    input:focus { outline: none; border-color: var(--brand); }
+    .row { display: flex; gap: 10px; margin-top: 14px; }
+    button {
+      flex: 1; padding: 11px 16px; border: 0; border-radius: 10px;
+      font-weight: 700; font-size: 14px; cursor: pointer;
+    }
+    #save { background: var(--brand); color: #07070a; }
+    #save:hover { filter: brightness(1.08); }
+    #open {
+      background: transparent; color: var(--text);
+      border: 1px solid var(--border); flex: 0 0 auto;
+    }
+    #open:hover { border-color: var(--brand); color: var(--brand); }
+    #open:disabled { opacity: .4; cursor: not-allowed; }
+    .status { font-size: 13px; margin-top: 12px; min-height: 18px; display: flex; align-items: center; gap: 7px; }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--muted); flex: 0 0 auto; }
+    .dot.on { background: var(--brand); box-shadow: 0 0 0 3px #a3e6352e; }
+    .foot { margin-top: 22px; padding-top: 14px; border-top: 1px solid #ffffff12; font-size: 11px; color: #6b6d78; }
+    .foot a { color: var(--muted); }
   </style>
 </head>
 <body>
-  <h1>Lavzen Hub - New Tab</h1>
-  <p>Enter the address of your self-hosted hub. Every new tab will open it, embedded full screen.</p>
+  <div class="head">
+    <img src="icons/icon128.png" alt="">
+    <div>
+      <h1>Lavzen Hub</h1>
+      <span>New-tab settings</span>
+    </div>
+  </div>
+
+  <p class="lead">Enter the address of your self-hosted hub. Every new tab will open it, embedded full screen.</p>
+
   <label for="url">Hub URL</label>
-  <input id="url" type="url" placeholder="https://hub.example.com" autocomplete="off">
-  <button id="save">Save</button>
-  <div class="ok" id="ok"></div>
+  <input id="url" type="url" placeholder="https://hub.example.com" autocomplete="off" spellcheck="false">
+
+  <div class="row">
+    <button id="save">Save</button>
+    <button id="open" title="Open a new tab">Open</button>
+  </div>
+
+  <div class="status"><span class="dot" id="dot"></span><span id="msg">Not configured yet.</span></div>
+
+  <div class="foot">Lavzen Hub · <a href="https://github.com/morpheusadam/LavzenHub" target="_blank" rel="noopener">github.com/morpheusadam/LavzenHub</a></div>
+
   <script src="options.js"></script>
 </body>
 </html>

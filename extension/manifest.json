@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Lavzen Hub - New Tab",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Open your self-hosted Lavzen Hub as the browser new-tab page, embedded full screen.",
   "chrome_url_overrides": { "newtab": "newtab.html" },
   "options_page": "options.html",
